@@ -140,11 +140,40 @@ def generate_plan_changes_csv(num_changes, user_data):
 
 # Function to generate user interests
 def get_user_interests():
-    genres = [
-        "Action", "Comedy", "Drama", "Sci-Fi", "Horror", "Romance", "Thriller", "Documentary"
-    ]
-    return '; '.join(f"{genre}: {random.choice(['Superhero', 'Stand-Up', 'Legal', 'Space Opera', 'Slasher', 'Mystery', 'Musical', 'True Crime'])}" for genre in random.sample(genres, 3))
-
+    GENRES = {
+    "Action": ["Superhero", "Martial Arts", "Adventure"],
+    "Comedy": ["Stand-Up", "Romantic Comedy", "Satire"],
+    "Drama": ["Historical", "Legal", "Family"],
+    "Documentary": ["Nature", "Biography", "Science"],
+    "Sci-Fi": ["Dystopian", "Space Opera", "Cyberpunk"],
+    "Thriller": ["Psychological", "Crime", "Mystery"],
+    "Romance": ["Classic", "Contemporary", "Erotic"],
+    "Horror": ["Slasher", "Supernatural", "Psychological"],
+    "Adventure": ["Fantasy", "Exploration", "Epic"],
+    "Fantasy": ["Mythical", "Dark Fantasy", "Urban Fantasy"],
+    "Animation": ["3D", "2D", "Stop Motion"],
+    "Musical": ["Broadway", "Film Musical", "Concert"],
+    "Mystery": ["Whodunit", "Suspense", "Cozy Mystery"],
+    "Crime": ["Detective", "Heist", "Legal Drama"],
+    "Family": ["Children's", "Teen", "Family Drama"],
+    "Historical": ["War", "Ancient", "Medieval"],
+    "War": ["Historical War", "Modern War", "Military"],
+    "Biography": ["Political", "Entertainment", "Historical"],
+    "Reality": ["Competition", "Lifestyle", "Travel"],
+    "Game Show": ["Quiz", "Talent", "Reality Competition"],
+    "Talk Show": ["Late Night", "Daytime", "Interview"],
+    "News": ["Local", "National", "International"],
+    "Educational": ["Science", "Math", "Language"],
+    "Sport": ["Live", "Documentary", "Highlights"],
+    "Lifestyle": ["Cooking", "Home Improvement", "Fitness"],
+    "Western": ["Classic", "Modern", "Spaghetti"],
+    "Superhero": ["Marvel", "DC", "Independent"] }
+    genres = random.sample(list(GENRES.keys()), 3)
+    interests = []
+    for genre in genres:
+        sub_genre = random.choice(GENRES[genre])
+        interests.append(f"{genre}: {sub_genre}")
+    return '; '.join(interests)
 # Generate user data, plan prices, and plan changes
 if __name__ == "__main__":
     num_users = 350000
